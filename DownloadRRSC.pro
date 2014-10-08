@@ -18,3 +18,6 @@ SOURCES += main.cpp\
 HEADERS  += mainform.h
 
 FORMS    += mainform.ui
+
+OTHER_FILES += \
+    README.md
