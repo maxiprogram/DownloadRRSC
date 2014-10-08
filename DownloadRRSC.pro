@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,9 +13,11 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainform.cpp
+        mainform.cpp \
+    Class/parser.cpp
 
-HEADERS  += mainform.h
+HEADERS  += mainform.h \
+    Class/parser.h
 
 FORMS    += mainform.ui
 
