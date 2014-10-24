@@ -17,9 +17,6 @@ public:
     explicit MainForm(QWidget *parent = 0);
     ~MainForm();
 
-private slots:
-    void on_pushButton_clicked();
-
 private:
     Ui::MainForm *ui;
     Parser p;

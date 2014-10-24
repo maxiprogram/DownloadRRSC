@@ -6,6 +6,13 @@
 #include <QDomDocument>
 #include <QDebug>
 
+struct Record
+{
+    QString url;
+    QString artist;
+    QString name;
+};
+
 class Parser: public QObject
 {
     Q_OBJECT
@@ -20,6 +27,7 @@ public slots:
 
 private:
     QNetworkAccessManager* manager;
+    QList<Record> list;
     bool isRead;
 };
 

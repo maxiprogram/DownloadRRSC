@@ -12,8 +12,3 @@ MainForm::~MainForm()
 {
     delete ui;
 }
-
-void MainForm::on_pushButton_clicked()
-{
-    //p.GetNumber();
-}
