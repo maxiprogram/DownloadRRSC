@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QtNetwork>
-
+#include <QDomDocument>
 #include <QDebug>
 
 class Parser: public QObject
@@ -20,7 +20,7 @@ public slots:
 
 private:
     QNetworkAccessManager* manager;
-    QByteArray resultHtml;
+    bool isRead;
 };
 
 #endif // PARSER_H

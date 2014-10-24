@@ -15,5 +15,5 @@ MainForm::~MainForm()
 
 void MainForm::on_pushButton_clicked()
 {
-    p.GetNumber();
+    //p.GetNumber();
 }
