@@ -19,8 +19,9 @@ class Parser: public QObject
 public:
     Parser();
     ~Parser();
-    QNetworkReply* Get();
+    QList<Record>* GetList();
     QString GetNumber();
+    void Update();
 
 public slots:
     void FinishRead(QNetworkReply* reply);
@@ -28,6 +29,7 @@ public slots:
 private:
     QNetworkAccessManager* manager;
     QList<Record> list;
+    QString number;
     bool isRead;
 };
 

@@ -12,6 +12,12 @@ Parser::~Parser()
 {
 }
 
+void Parser::Update()
+{
+    if (!isRead)
+        manager->get(QNetworkRequest(QUrl("http://www.radiorecord.ru/radio/charts/")));
+}
+
 void Parser::FinishRead(QNetworkReply* reply)
 {
     list.clear();
@@ -48,24 +54,23 @@ void Parser::FinishRead(QNetworkReply* reply)
         list.append(r);
     }
 
-
-
     isRead = false;
     qDebug()<<"End Finish";
 }
 
-QNetworkReply* Parser::Get()
+QList<Record>* Parser::GetList()
 {
     if (!isRead)
     {
-        isRead = true;
-        return manager->get(QNetworkRequest(QUrl("http://www.radiorecord.ru/radio/charts/")));
+        return &list;
     }else
         return 0;
-
 }
 
 QString Parser::GetNumber()
 {
-    //qDebug()<<"Index="<<resultHtml.indexOf("<span class=\"sc-num\" id=\"superchart_id\">");
+    if (!isRead)
+        return number;
+    else
+        return "";
 }

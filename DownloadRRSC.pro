@@ -23,3 +23,6 @@ FORMS    += mainform.ui
 
 OTHER_FILES += \
     README.md
+
+RESOURCES += \
+    resource.qrc
