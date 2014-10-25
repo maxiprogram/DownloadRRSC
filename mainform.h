@@ -2,6 +2,7 @@
 #define MAINFORM_H
 
 #include <QMainWindow>
+#include <QFileDialog>
 
 #include "Class/parser.h"
 
@@ -19,6 +20,7 @@ public:
 
 private slots:
     void on_pushButton_clicked();
+    void onClickTable(int row,int col);
 
 private:
     Ui::MainForm *ui;

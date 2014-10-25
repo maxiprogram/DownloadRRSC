@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <QtNetwork>
-#include <QDomDocument>
 #include <QDebug>
 
 struct Record

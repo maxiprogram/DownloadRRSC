@@ -7,6 +7,8 @@ MainForm::MainForm(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->tableWidget->setEditTriggers(QTableWidget::NoEditTriggers);
+    connect(ui->tableWidget,SIGNAL(cellClicked(int,int)),this,SLOT(onClickTable(int,int)));
+
 }
 
 MainForm::~MainForm()
@@ -23,6 +25,8 @@ void MainForm::on_pushButton_clicked()
     for (int i=0;i<rec_count;i++)
         ui->tableWidget->removeRow(0);
 
+    if (!list)
+        return;
     for (int i=0;i<list->length();i++)
     {
         ui->tableWidget->insertRow(ui->tableWidget->rowCount());
@@ -32,5 +36,24 @@ void MainForm::on_pushButton_clicked()
         ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,3,new QTableWidgetItem(QIcon("://standardbutton-save-16.png"),""));
     }
 
+}
+
+void MainForm::onClickTable(int row, int col)
+{
+    if (col!=3)
+        return;
+    QString filename = QFileDialog::getSaveFileName(this,"Скачать");
+    if (filename.isEmpty())
+        return;
+
+    QString url = ui->tableWidget->item(row,2)->text();
+    QNetworkAccessManager man;
+    QNetworkReply* reply = man.get(QNetworkRequest(QUrl(url)));
+
+    QFile f(filename);
+    f.open(QIODevice::WriteOnly);
+    f.write(reply->readAll());
+    f.close();
+    qDebug()<<"End Save";
 
 }

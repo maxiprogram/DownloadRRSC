@@ -34,6 +34,8 @@ void Parser::FinishRead(QNetworkReply* reply)
     {
         Record r;
         int ind = html.indexOf("<td class=\"play_pause\"");
+        if (ind==-1)
+            break;
         html = html.remove(0,ind+33);
         ind = html.indexOf("\">");
         r.url = html.left(ind);
