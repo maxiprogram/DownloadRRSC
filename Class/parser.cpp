@@ -20,6 +20,7 @@ void Parser::Update()
 
 void Parser::FinishRead(QNetworkReply* reply)
 {
+    qDebug()<<"Start Parser";
     list.clear();
     QString html;
     html = reply->readAll();
@@ -29,6 +30,12 @@ void Parser::FinishRead(QNetworkReply* reply)
 
     html = html.remove(i_f+7,html.length()-i_f+7);
     html = html.remove(0,i_s);
+
+    i_s = html.indexOf("<span class=\"sc-num\"");
+    html = html.remove(0,i_s+40);
+    i_s = html.indexOf("</span>");
+    number = html.left(i_s);
+    qDebug()<<number;
 
     for (int i=0;i<33;i++)
     {

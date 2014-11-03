@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QFileDialog>
 
+#include "downloadform.h"
 #include "Class/parser.h"
 
 namespace Ui {
@@ -19,12 +20,17 @@ public:
     ~MainForm();
 
 private slots:
+    void DownloadFinish(QNetworkReply* reply);
     void on_pushButton_clicked();
     void onClickTable(int row,int col);
 
 private:
     Ui::MainForm *ui;
+    QString filename;
+    bool isDownload;
+    DownloadForm* dialog;
     Parser p;
+    QNetworkAccessManager* manager;
 };
 
 #endif // MAINFORM_H

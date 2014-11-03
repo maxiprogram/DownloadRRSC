@@ -14,12 +14,15 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainform.cpp \
-    Class/parser.cpp
+    Class/parser.cpp \
+    downloadform.cpp
 
 HEADERS  += mainform.h \
-    Class/parser.h
+    Class/parser.h \
+    downloadform.h
 
-FORMS    += mainform.ui
+FORMS    += mainform.ui \
+    downloadform.ui
 
 OTHER_FILES += \
     README.md

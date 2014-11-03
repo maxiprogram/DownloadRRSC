@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>standardbutton-save-16.png</file>
+        <file>download.GIF</file>
+        <file>save.png</file>
     </qresource>
 </RCC>
