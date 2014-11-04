@@ -14,6 +14,9 @@ MainForm::MainForm(QWidget *parent) :
     isDownload = false;
 
     dialog = new DownloadForm(this);
+
+    online_play = new QMediaPlayer(this);
+    isPlay = false;
 }
 
 MainForm::~MainForm()
@@ -59,7 +62,10 @@ void MainForm::on_pushButton_clicked()
         ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,1,new QTableWidgetItem(list->at(i).name));
         ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,2,new QTableWidgetItem(list->at(i).url));
         ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,3,new QTableWidgetItem(QIcon("://save.png"),""));
+        ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,4,new QTableWidgetItem(QIcon("://play.png"),""));
     }
+
+    ui->tableWidget->repaint();
 
 }
 
@@ -67,18 +73,54 @@ void MainForm::onClickTable(int row, int col)
 {
     if (isDownload)
         return;
-    if (col!=3)
-        return;
-    QString url = ui->tableWidget->item(row,2)->text();
-    int ind = url.lastIndexOf("/");
-    QString name = url.right(url.length()-ind-1);
-    qDebug()<<name;
-    filename = QFileDialog::getSaveFileName(this,"Скачать...",name,"Музыка (*.mp3)");
-    if (filename.isEmpty())
-        return;
 
-    qDebug()<<"Start Save: "<<url;
-    manager->get(QNetworkRequest(QUrl(url)));
-    isDownload = true;
-    dialog->show();
+    QString url = ui->tableWidget->item(row,2)->text();
+
+    if (col==3)
+    {
+        int ind = url.lastIndexOf("/");
+        QString name = url.right(url.length()-ind-1);
+        qDebug()<<name;
+        filename = QFileDialog::getSaveFileName(this,"Скачать...",name,"Музыка (*.mp3)");
+        if (filename.isEmpty())
+            return;
+
+        qDebug()<<"Start Save: "<<url;
+        manager->get(QNetworkRequest(QUrl(url)));
+        isDownload = true;
+        dialog->show();
+    }
+
+    if (col==4)
+    {
+        qDebug()<<"Play&Pause";
+        if (!isPlay)
+        {
+            isPlay = true;
+            online_play->setMedia(QUrl(url));
+            online_play->play();
+            ui->tableWidget->setItem(row,4,new QTableWidgetItem(QIcon("://pause.png"),""));
+        }else
+        {
+            isPlay = false;
+            online_play->stop();
+            ui->tableWidget->setItem(row,4,new QTableWidgetItem(QIcon("://play.png"),""));
+        }
+    }
+}
+
+void MainForm::on_pushButton_2_clicked()
+{
+    if (!isPlay)
+    {
+        online_play->setMedia(QUrl("http://air.radiorecord.ru:8101/rr_320"));
+        isPlay = true;
+        online_play->play();
+        ui->pushButton_2->setIcon(QIcon("://pause.png"));
+    }else
+    {
+        isPlay = false;
+        online_play->stop();
+        ui->pushButton_2->setIcon(QIcon("://play.png"));
+    }
 }

@@ -1,6 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>download.GIF</file>
+        <file>pause.png</file>
+        <file>play.png</file>
         <file>save.png</file>
     </qresource>
 </RCC>

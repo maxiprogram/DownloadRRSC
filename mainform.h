@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
+#include <QMediaPlayer>
 
 #include "downloadform.h"
 #include "Class/parser.h"
@@ -24,13 +25,17 @@ private slots:
     void on_pushButton_clicked();
     void onClickTable(int row,int col);
 
+    void on_pushButton_2_clicked();
+
 private:
     Ui::MainForm *ui;
     QString filename;
     bool isDownload;
+    bool isPlay;
     DownloadForm* dialog;
     Parser p;
     QNetworkAccessManager* manager;
+    QMediaPlayer* online_play;
 };
 
 #endif // MAINFORM_H
