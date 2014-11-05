@@ -15,12 +15,19 @@ Parser::~Parser()
 void Parser::Update()
 {
     if (!isRead)
+    {
         manager->get(QNetworkRequest(QUrl("http://www.radiorecord.ru/radio/charts/")));
+    }
 }
 
 void Parser::FinishRead(QNetworkReply* reply)
 {
     qDebug()<<"Start Parser";
+    if (reply->error()!=QNetworkReply::NoError)
+    {
+        QMessageBox::warning(0,"Ошибка","Проблема с подключением к интернету!");
+        //return;
+    }
     list.clear();
     QString html;
     html = reply->readAll();

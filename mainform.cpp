@@ -16,6 +16,7 @@ MainForm::MainForm(QWidget *parent) :
     dialog = new DownloadForm(this);
 
     online_play = new QMediaPlayer(this);
+    connect(online_play,SIGNAL(error(QMediaPlayer::Error)),this,SLOT(CathErrorOnlinePlay(QMediaPlayer::Error)));
     isPlay = false;
 }
 
@@ -40,6 +41,25 @@ void MainForm::DownloadFinish(QNetworkReply* reply)
     isDownload = false;
     dialog->close();
     qDebug()<<"End Save";
+}
+
+void MainForm::CathErrorOnlinePlay(QMediaPlayer::Error error)
+{
+    if (error!=QMediaPlayer::NetworkError)
+    {
+        QMessageBox::warning(this,"Ошибка","Проблема с подключением к интернету!");
+        return;
+    }
+    if (error!=QMediaPlayer::ResourceError)
+    {
+        QMessageBox::warning(this,"Ошибка","Невозвожно открыть файл!");
+        return;
+    }
+    if (error!=QMediaPlayer::FormatError)
+    {
+        QMessageBox::warning(this,"Ошибка","Невозвожно воспроизвести данный формат!");
+        return;
+    }
 }
 
 void MainForm::on_pushButton_clicked()

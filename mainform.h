@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
+#include <QMessageBox>
 #include <QMediaPlayer>
 
 #include "downloadform.h"
@@ -22,6 +23,7 @@ public:
 
 private slots:
     void DownloadFinish(QNetworkReply* reply);
+    void CathErrorOnlinePlay(QMediaPlayer::Error error);
     void on_pushButton_clicked();
     void onClickTable(int row,int col);
 
