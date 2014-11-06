@@ -18,6 +18,8 @@ MainForm::MainForm(QWidget *parent) :
     online_play = new QMediaPlayer(this);
     connect(online_play,SIGNAL(error(QMediaPlayer::Error)),this,SLOT(CathErrorOnlinePlay(QMediaPlayer::Error)));
     isPlay = false;
+
+    about = new AboutForm(this);
 }
 
 MainForm::~MainForm()
@@ -143,4 +145,9 @@ void MainForm::on_pushButton_2_clicked()
         online_play->stop();
         ui->pushButton_2->setIcon(QIcon("://play.png"));
     }
+}
+
+void MainForm::on_action_triggered()
+{
+    about->exec();
 }

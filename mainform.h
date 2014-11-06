@@ -7,6 +7,7 @@
 #include <QMediaPlayer>
 
 #include "downloadform.h"
+#include "aboutform.h"
 #include "Class/parser.h"
 
 namespace Ui {
@@ -29,12 +30,15 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_action_triggered();
+
 private:
     Ui::MainForm *ui;
     QString filename;
     bool isDownload;
     bool isPlay;
     DownloadForm* dialog;
+    AboutForm* about;
     Parser p;
     QNetworkAccessManager* manager;
     QMediaPlayer* online_play;
